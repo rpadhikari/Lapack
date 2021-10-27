@@ -16,7 +16,8 @@ program main
   integer(4), parameter :: LDA = 4
   integer(4) :: INFO
   character(len=1), parameter :: JOBZ='V', UPLO='U'
-  integer(4) :: WORK(1, 3*N - 1), LWORK(1, 3*N - 1)
+  integer(4), parameter :: LWORK=2*N**2+5*N+1
+  integer(4) :: WORK(LWORK)
   real(8) :: A(LDA, N), W(N)
   integer(4) :: i, j
   open(1,file='amat.dat', action='read', status='old')
@@ -27,6 +28,11 @@ program main
   end do
   close(1)
 
+  do i=1,N
+    write(*,101) (A(i,j), j=1,N)
+  end do
+  write(*,*)
+  
   call DSYEV(JOBZ, UPLO, N, A, LDA, W, WORK, LWORK, INFO)
 
 !  if(INFO .gt. 0) then
@@ -35,7 +41,7 @@ program main
   
 !  print eigenvalues  
     do i=1, N
-      write(*, 100), W(i)
+      write(*, 100), w(i)
     end do
     100 format(f10.5)
 
