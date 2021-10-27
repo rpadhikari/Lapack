@@ -7,9 +7,11 @@
 
 ! With eigenvalues as below:
 ! 1.0 2.0 5.0 10.0
-! and eigenvectors are:
-! -------------  
- 
+! and eigenvectors are:  
+!   0.70711  -0.00000   0.31623   0.63246
+!  -0.70711  -0.00000   0.31623   0.63246
+!   0.00000   0.70711  -0.63246   0.31623
+!  -0.00000  -0.70711  -0.63246   0.31623
 program main
   implicit none
   integer(4), parameter :: N = 4
