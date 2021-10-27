@@ -15,6 +15,7 @@ program main
   integer(4), parameter :: N = 4
   integer(4), parameter :: LDA = 4
   integer(4) :: INFO
+  character(len=1), parameter :: JOBZ='V', UPLO='U'
   integer(4) :: WORK(1, 3*N - 1), LWORK(1, 3*N - 1)
   real(8) :: A(LDA, N), W(N)
   integer(4) :: i, j
@@ -26,7 +27,7 @@ program main
   end do
   close(1)
 
-  call DSYEV('V', 'U', N, A, LDA, W, WORK, LWORK, INFO)
+  call DSYEV(JOBZ, UPLO, N, A, LDA, W, WORK, LWORK, INFO)
 
 !  if(INFO .gt. 0) then
 !    write(*,*)' Failed to compute eigenvalues or eigenvectors'
@@ -34,7 +35,7 @@ program main
   
 !  print eigenvalues  
     do i=1, N
-      write(*, 100), w(i)
+      write(*, 100), W(i)
     end do
     100 format(f10.5)
 
